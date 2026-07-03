@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>いきもの超ワールド展 — 予習・学習ガイド</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f5f5f0; color: #1a1a1a; padding: 1rem; }
+.page { max-width: 680px; margin: 0 auto; padding: 1.5rem 0; }
+
+.hero { background: #E1F5EE; border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; border: 1px solid #9FE1CB; }
+.hero-title { font-size: 22px; font-weight: 600; color: #085041; line-height: 1.3; }
+.hero-sub { font-size: 14px; color: #0F6E56; margin-top: 6px; }
+.hero-info { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.info-chip { background: #9FE1CB; color: #085041; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; }
+
+.tabs { display: flex; gap: 6px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.tab-btn { padding: 8px 16px; border: 1px solid #ccc; border-radius: 20px; font-size: 14px; cursor: pointer; background: #fff; color: #555; transition: all 0.15s; }
+.tab-btn.active { background: #085041; color: #E1F5EE; border-color: #085041; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.section-label { font-size: 11px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+
+.chapter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+.chapter-card { background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1rem; }
+.ch-icon { display: flex; justify-content: center; margin-bottom: 10px; }
+.ch-num { font-size: 11px; color: #aaa; font-weight: 600; margin-bottom: 2px; }
+.ch-title { font-size: 14px; font-weight: 600; color: #1a1a1a; margin-bottom: 6px; }
+.ch-desc { font-size: 12px; color: #666; line-height: 1.5; }
+.ch-en { font-size: 11px; color: #0F6E56; margin-top: 6px; font-style: italic; }
+
+.en-card { background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+.en-ja { font-size: 13px; color: #888; margin-bottom: 4px; }
+.en-phrase { font-size: 20px; font-weight: 600; color: #085041; margin-bottom: 4px; }
+.en-level { font-size: 11px; color: #aaa; margin-bottom: 8px; }
+.en-example { font-size: 13px; color: #555; border-left: 3px solid #9FE1CB; padding-left: 10px; line-height: 1.6; }
+
+.phrase-box { background: #E1F5EE; border: 1px solid #9FE1CB; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+.phrase-box .en-ja { color: #0F6E56; }
+.phrase-item { font-size: 14px; color: #085041; margin-top: 8px; line-height: 1.7; }
+
+.animal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+.animal-card { background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; padding: 10px; text-align: center; }
+.animal-icon { margin-bottom: 6px; display: flex; justify-content: center; }
+.animal-ja { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+.animal-en { font-size: 12px; color: #0F6E56; margin-bottom: 4px; }
+.animal-fact { font-size: 11px; color: #888; line-height: 1.4; }
+
+.worksheet { background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.25rem; margin-bottom: 14px; }
+.ws-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.ws-num { width: 30px; height: 30px; border-radius: 50%; background: #E1F5EE; color: #085041; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ws-title { font-size: 15px; font-weight: 600; color: #1a1a1a; }
+.ws-q { font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 10px; }
+.ws-input { width: 100%; border: 1px solid #ccc; border-radius: 8px; padding: 8px 10px; font-size: 14px; font-family: inherit; color: #1a1a1a; background: #fafafa; resize: vertical; }
+.ws-input:focus { outline: none; border-color: #0F6E56; }
+.ws-check { display: flex; flex-direction: column; gap: 10px; }
+.ws-check label { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: #555; cursor: pointer; line-height: 1.5; }
+.ws-check input[type=checkbox] { margin-top: 3px; width: 16px; height: 16px; flex-shrink: 0; accent-color: #085041; }
+
+.stars { display: flex; gap: 8px; margin-top: 8px; }
+.star-btn { font-size: 26px; cursor: pointer; opacity: 0.25; transition: opacity 0.1s; }
+.star-btn.lit { opacity: 1; }
+
+.tip-box { background: #FAEEDA; border: 1px solid #FAC775; border-radius: 12px; padding: 1rem 1.25rem; margin-top: 1rem; }
+.tip-title { font-size: 13px; font-weight: 600; color: #633806; margin-bottom: 4px; }
+.tip-text { font-size: 13px; color: #854F0B; line-height: 1.6; }
+
+.section-gap { margin-bottom: 1rem; }
+
+.quiz-q { background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.1rem 1.25rem; margin-bottom: 12px; }
+.quiz-num { font-size: 11px; font-weight: 600; color: #0F6E56; margin-bottom: 6px; }
+.quiz-text { font-size: 15px; font-weight: 600; color: #1a1a1a; margin-bottom: 12px; line-height: 1.5; }
+.quiz-choices { display: flex; flex-direction: column; gap: 7px; }
+.quiz-btn { padding: 9px 14px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; text-align: left; background: #fafafa; cursor: pointer; transition: all 0.12s; color: #1a1a1a; }
+.quiz-btn:hover:not([disabled]) { border-color: #0F6E56; background: #E1F5EE; }
+.quiz-btn.correct { background: #E1F5EE; border-color: #0F6E56; color: #085041; font-weight: 600; }
+.quiz-btn.wrong { background: #FCEBEB; border-color: #E24B4A; color: #A32D2D; }
+.quiz-comment { font-size: 13px; margin-top: 10px; padding: 8px 12px; border-radius: 8px; line-height: 1.6; display: none; }
+.quiz-comment.show { display: block; }
+.quiz-comment.ok { background: #E1F5EE; color: #085041; }
+.quiz-comment.ng { background: #FCEBEB; color: #A32D2D; }
+.quiz-score { background: #E1F5EE; border: 1px solid #9FE1CB; border-radius: 12px; padding: 1.25rem; text-align: center; margin-top: 1rem; display: none; }
+.quiz-score.show { display: block; }
+.quiz-score-num { font-size: 32px; font-weight: 600; color: #085041; }
+.quiz-score-msg { font-size: 14px; color: #0F6E56; margin-top: 6px; }
+.quiz-retry { margin-top: 12px; padding: 8px 20px; background: #085041; color: #fff; border: none; border-radius: 20px; font-size: 14px; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-title">いきもの超ワールド展<br>国立科学博物館 × ダーウィンが来た！</div>
+    <div class="hero-sub">行く前に予習しよう！ 英語も学べる生き物ガイド</div>
+    <div class="hero-info">
+      <span class="info-chip">📅 2026年7/11〜10/12</span>
+      <span class="info-chip">📍 国立科学博物館・上野</span>
+      <span class="info-chip">🕘 9:00〜17:00</span>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('chapters', this)">展示チャプター</button>
+    <button class="tab-btn" onclick="switchTab('english', this)">英語で広げよう</button>
+    <button class="tab-btn" onclick="switchTab('animals', this)">注目の生き物</button>
+    <button class="tab-btn" onclick="switchTab('worksheet', this)">ワークシート</button>
+  </div>
+
+  <!-- チャプター -->
+  <div id="tab-chapters" class="tab-content active">
+    <div class="section-label section-gap">6つのテーマ — 展示構成</div>
+    <div class="chapter-grid">
+      <div class="chapter-card">
+        <div class="ch-icon">
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+            <!-- eye white -->
+            <path d="M4 28 Q28 6 52 28 Q28 50 4 28 Z" fill="#FFF8F0"/>
+            <!-- iris -->
+            <circle cx="28" cy="28" r="13" fill="#4A90D9"/>
+            <!-- iris detail rings -->
+            <circle cx="28" cy="28" r="10" fill="none" stroke="#2A70B9" stroke-width="1" opacity="0.4"/>
+            <circle cx="28" cy="28" r="7" fill="none" stroke="#1A50A0" stroke-width="0.5" opacity="0.3"/>
+            <!-- pupil -->
+            <circle cx="28" cy="28" r="6.5" fill="#1A1A2A"/>
+            <!-- specular highlights -->
+            <circle cx="23" cy="23" r="3" fill="#fff" opacity="0.75"/>
+            <circle cx="33" cy="31" r="1.5" fill="#fff" opacity="0.4"/>
+            <!-- upper lid -->
+            <path d="M4 28 Q28 6 52 28" stroke="#8B6040" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- lower lid -->
+            <path d="M4 28 Q28 46 52 28" stroke="#C09870" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            <!-- lashes -->
+            <path d="M13 21 Q11 15 12 10" stroke="#5A3A20" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <path d="M21 14 Q20 8 21 5" stroke="#5A3A20" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <path d="M28 12 Q28 6 29 3" stroke="#5A3A20" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <path d="M35 14 Q36 8 35 5" stroke="#5A3A20" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <path d="M43 21 Q45 15 44 10" stroke="#5A3A20" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ch-num">Chapter 1</div>
+        <div class="ch-title">五感のちがい</div>
+        <div class="ch-desc">動物によって見え方・聞こえ方がまったくちがう！</div>
+        <div class="ch-en">The Five Senses</div>
+      </div>
+      <div class="chapter-card">
+        <div class="ch-icon">
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+            <!-- mane outer -->
+            <circle cx="28" cy="32" r="22" fill="#A85010"/>
+            <!-- mane inner -->
+            <circle cx="28" cy="30" r="18" fill="#C87020"/>
+            <!-- face -->
+            <circle cx="28" cy="28" r="15" fill="#E89030"/>
+            <!-- ears -->
+            <circle cx="14" cy="16" r="5" fill="#E89030"/>
+            <circle cx="14" cy="16" r="3" fill="#F0A858"/>
+            <circle cx="42" cy="16" r="5" fill="#E89030"/>
+            <circle cx="42" cy="16" r="3" fill="#F0A858"/>
+            <!-- eyes -->
+            <circle cx="22" cy="25" r="4" fill="#fff"/>
+            <circle cx="34" cy="25" r="4" fill="#fff"/>
+            <circle cx="22" cy="25" r="2.5" fill="#C87020"/>
+            <circle cx="34" cy="25" r="2.5" fill="#C87020"/>
+            <circle cx="22" cy="25" r="1.5" fill="#1A1A1A"/>
+            <circle cx="34" cy="25" r="1.5" fill="#1A1A1A"/>
+            <circle cx="22.8" cy="24.2" r="0.8" fill="#fff"/>
+            <circle cx="34.8" cy="24.2" r="0.8" fill="#fff"/>
+            <!-- nose -->
+            <ellipse cx="28" cy="31" rx="3.5" ry="2.5" fill="#C04050"/>
+            <!-- nostrils -->
+            <circle cx="26.5" cy="31.5" r="1" fill="#A03040"/>
+            <circle cx="29.5" cy="31.5" r="1" fill="#A03040"/>
+            <!-- open mouth with teeth -->
+            <path d="M22 35 Q28 42 34 35" fill="#A03040"/>
+            <path d="M24 36 L24 40 M27 37 L27 41 M31 37 L31 41" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+            <!-- whiskers -->
+            <path d="M8 31 L20 32" stroke="#A0802A" stroke-width="1" stroke-linecap="round"/>
+            <path d="M8 34 L20 34" stroke="#A0802A" stroke-width="1" stroke-linecap="round"/>
+            <path d="M48 31 L36 32" stroke="#A0802A" stroke-width="1" stroke-linecap="round"/>
+            <path d="M48 34 L36 34" stroke="#A0802A" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ch-num">Chapter 2</div>
+        <div class="ch-title">エネルギー補給</div>
+        <div class="ch-desc">何を食べるか、どう食べるかは生き物によって全然ちがう！</div>
+        <div class="ch-en">Eating Strategies</div>
+      </div>
+      <div class="chapter-card">
+        <div class="ch-icon">
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+            <!-- ground line -->
+            <line x1="2" y1="50" x2="54" y2="50" stroke="#C8B890" stroke-width="1.5"/>
+            <!-- elephant body -->
+            <ellipse cx="22" cy="38" rx="14" ry="10" fill="#8898B0"/>
+            <!-- elephant head -->
+            <ellipse cx="10" cy="31" rx="9" ry="8" fill="#8898B0"/>
+            <!-- ear -->
+            <ellipse cx="17" cy="29" rx="7" ry="8" fill="#7080A0"/>
+            <ellipse cx="16" cy="29" rx="5" ry="6" fill="#A0B4C8" opacity="0.45"/>
+            <!-- trunk -->
+            <path d="M5 36 Q0 44 5 50" stroke="#8898B0" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+            <!-- tusk -->
+            <path d="M6 38 Q2 42 3 47" stroke="#FFFFF0" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <!-- eye -->
+            <circle cx="8" cy="29" r="2.2" fill="#1A1A2A"/>
+            <circle cx="8.7" cy="28.3" r="0.9" fill="#fff" opacity="0.7"/>
+            <!-- elephant legs -->
+            <rect x="11" y="46" width="5" height="6" rx="2.5" fill="#7888A0"/>
+            <rect x="19" y="46" width="5" height="6" rx="2.5" fill="#7888A0"/>
+            <rect x="27" y="46" width="5" height="6" rx="2.5" fill="#7888A0"/>
+            <!-- tail -->
+            <path d="M35 38 Q40 36 40 42" stroke="#8898B0" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <!-- tiny mouse -->
+            <ellipse cx="47" cy="47" rx="5" ry="3.5" fill="#B09080"/>
+            <ellipse cx="42" cy="46" rx="3.5" ry="3" fill="#C0A090"/>
+            <circle cx="40" cy="45" r="1.6" fill="#1A1A1A"/>
+            <circle cx="40.6" cy="44.4" r="0.6" fill="#fff" opacity="0.7"/>
+            <circle cx="40.5" cy="43" r="1.6" fill="#D0B0A0"/>
+            <path d="M51 47 Q55 46 55 50" stroke="#C0A090" stroke-width="1" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="ch-num">Chapter 3</div>
+        <div class="ch-title">サイズのひみつ</div>
+        <div class="ch-desc">大きいと得？小さいと得？生き物のサイズのひみつ！</div>
+        <div class="ch-en">Size Adaptation</div>
+      </div>
+      <div class="chapter-card">
+        <div class="ch-icon">
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+            <!-- sky hint / wind lines -->
+            <path d="M2 18 Q8 16 12 18" stroke="#B0C8E0" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            <path d="M2 22 Q6 20 9 22" stroke="#B0C8E0" stroke-width="1" fill="none" stroke-linecap="round"/>
+            <!-- tail feathers -->
+            <path d="M12 31 L4 38 L9 30 L3 32 Z" fill="#5A6870"/>
+            <!-- body -->
+            <ellipse cx="26" cy="30" rx="16" ry="8" fill="#6A7880" transform="rotate(-8 26 30)"/>
+            <!-- belly -->
+            <ellipse cx="22" cy="32" rx="10" ry="5" fill="#E8DEC8" transform="rotate(-8 22 32)"/>
+            <!-- left wing spread -->
+            <path d="M22 28 Q12 12 2 16 Q8 24 18 28 Z" fill="#5A6870"/>
+            <path d="M20 27 Q12 14 4 17" stroke="#6A7880" stroke-width="0.8" fill="none"/>
+            <path d="M19 27 Q11 16 5 19" stroke="#7A8890" stroke-width="0.6" fill="none" opacity="0.6"/>
+            <!-- right wing spread -->
+            <path d="M34 26 Q46 10 54 14 Q48 22 40 26 Z" fill="#4A5860"/>
+            <path d="M36 25 Q46 12 52 15" stroke="#5A6870" stroke-width="0.8" fill="none"/>
+            <path d="M37 25 Q47 14 52 17" stroke="#6A7880" stroke-width="0.6" fill="none" opacity="0.6"/>
+            <!-- head -->
+            <ellipse cx="40" cy="26" rx="8" ry="7" fill="#5A6870"/>
+            <!-- eye -->
+            <circle cx="43" cy="24" r="2.8" fill="#fff"/>
+            <circle cx="43" cy="24" r="1.7" fill="#1A1A2A"/>
+            <circle cx="43.7" cy="23.3" r="0.7" fill="#fff"/>
+            <!-- beak -->
+            <path d="M47 25 L53 27 L47 30 Z" fill="#D4A020"/>
+            <line x1="47" y1="27.5" x2="53" y2="27" stroke="#B08010" stroke-width="0.5"/>
+          </svg>
+        </div>
+        <div class="ch-num">Chapter 4</div>
+        <div class="ch-title">いどうのかたち</div>
+        <div class="ch-desc">空を飛ぶ・海をおよぐ・土をほる、いろんないどう方！</div>
+        <div class="ch-en">Ways of Moving</div>
+      </div>
+      <div class="chapter-card">
+        <div class="ch-icon">
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+            <!-- dashed path lines -->
+            <path d="M28 18 Q20 26 14 32" stroke="#E8A820" stroke-width="1.2" stroke-dasharray="2 2.5" fill="none"/>
+            <path d="M28 18 Q36 26 42 34" stroke="#E8A820" stroke-width="1.2" stroke-dasharray="2 2.5" fill="none"/>
+            <!-- bee 1 top center -->
+            <ellipse cx="28" cy="13" rx="6.5" ry="5" fill="#E8A820"/>
+            <rect x="23.5" y="11" width="2.5" height="4" rx="0.5" fill="#1A1A1A" opacity="0.4"/>
+            <rect x="28.5" y="11" width="2.5" height="4" rx="0.5" fill="#1A1A1A" opacity="0.4"/>
+            <circle cx="34" cy="12" r="3.5" fill="#F0C040"/>
+            <circle cx="35" cy="11" r="1.2" fill="#1A1A1A"/>
+            <ellipse cx="26" cy="9" rx="5.5" ry="2.5" fill="#C8E8FF" opacity="0.75" transform="rotate(-15 26 9)"/>
+            <ellipse cx="26" cy="17" rx="4" ry="2" fill="#C8E8FF" opacity="0.6" transform="rotate(10 26 17)"/>
+            <!-- bee 2 bottom left -->
+            <ellipse cx="14" cy="37" rx="6.5" ry="5" fill="#E8A820" transform="rotate(25 14 37)"/>
+            <circle cx="20" cy="34" r="3.5" fill="#F0C040"/>
+            <circle cx="21" cy="33" r="1.2" fill="#1A1A1A"/>
+            <ellipse cx="12" cy="32" rx="5.5" ry="2.5" fill="#C8E8FF" opacity="0.75" transform="rotate(5 12 32)"/>
+            <ellipse cx="12" cy="41" rx="4" ry="2" fill="#C8E8FF" opacity="0.6" transform="rotate(30 12 41)"/>
+            <!-- bee 3 bottom right -->
+            <ellipse cx="42" cy="38" rx="6.5" ry="5" fill="#E8A820" transform="rotate(-20 42 38)"/>
+            <circle cx="48" cy="35" r="3.5" fill="#F0C040"/>
+            <circle cx="49" cy="34" r="1.2" fill="#1A1A1A"/>
+            <ellipse cx="40" cy="34" rx="5.5" ry="2.5" fill="#C8E8FF" opacity="0.75" transform="rotate(-10 40 34)"/>
+            <ellipse cx="40" cy="42" rx="4" ry="2" fill="#C8E8FF" opacity="0.6" transform="rotate(-22 40 42)"/>
+          </svg>
+        </div>
+        <div class="ch-num">Chapter 5</div>
+        <div class="ch-title">群れのひみつ</div>
+        <div class="ch-desc">群れでくらすと何が変わる？力をあわせるといいことがいっぱい！</div>
+        <div class="ch-en">Living Together</div>
+      </div>
+      <div class="chapter-card">
+        <div class="ch-icon">
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+            <!-- sun -->
+            <circle cx="44" cy="10" r="6" fill="#F0C030"/>
+            <path d="M44 2 L44 0 M52 10 L54 10 M50 6 L52 4 M50 14 L52 16" stroke="#F0C030" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- ground -->
+            <rect x="4" y="44" width="48" height="10" rx="3" fill="#C8A870"/>
+            <rect x="4" y="42" width="48" height="4" rx="2" fill="#8B6030"/>
+            <!-- main stem -->
+            <path d="M28 42 Q27 34 28 20" stroke="#4A9020" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <!-- left leaf -->
+            <path d="M28 36 Q16 28 14 33 Q16 40 28 38 Z" fill="#5AB030"/>
+            <path d="M28 36 Q18 31 15 33" stroke="#3A8010" stroke-width="1" fill="none"/>
+            <!-- right leaf -->
+            <path d="M28 28 Q40 20 42 25 Q40 32 28 30 Z" fill="#5AB030"/>
+            <path d="M28 28 Q38 22 41 25" stroke="#3A8010" stroke-width="1" fill="none"/>
+            <!-- bud at top -->
+            <ellipse cx="28" cy="18" rx="5" ry="4.5" fill="#80C840"/>
+            <path d="M24 17 Q28 11 32 17" fill="#A0D860"/>
+            <!-- seed in ground -->
+            <ellipse cx="28" cy="45" rx="4" ry="2.5" fill="#A07848"/>
+            <!-- tiny roots -->
+            <path d="M26 47 Q23 50 21 53" stroke="#A07848" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+            <path d="M30 47 Q33 50 35 53" stroke="#A07848" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+            <!-- cycle arrow hint -->
+            <path d="M8 30 Q6 18 12 10" stroke="#80C840" stroke-width="1.5" stroke-dasharray="2 2" fill="none" stroke-linecap="round"/>
+            <path d="M12 10 L9 7 M12 10 L15 13" stroke="#80C840" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ch-num">Chapter 6</div>
+        <div class="ch-title">命のバトン</div>
+        <div class="ch-desc">生き物のいのちがどうつながってバトンされていくか！</div>
+        <div class="ch-en">The Cycle of Life</div>
+      </div>
+    </div>
+    <div class="tip-box">
+      <div class="tip-title">予習のコツ</div>
+      <div class="tip-text">気になるチャプターを行く前に調べておくと、博物館で「あ、これ知ってる！」って思えて楽しさが2倍になるよ。</div>
+    </div>
+  </div>
+
+  <!-- 英語 -->
+  <div id="tab-english" class="tab-content">
+    <div class="section-label section-gap">えいごクイズ — 生き物のえいごわかるかな？</div>
+
+    <div class="quiz-q" id="q1">
+      <div class="quiz-num">Q1</div>
+      <div class="quiz-text">All animals must <b>survive</b> in the wild.<br>What does "<b>survive</b>" mean?</div>
+      <div class="quiz-choices">
+        <button class="quiz-btn" onclick="answer(this,'q1',false)">To eat food</button>
+        <button class="quiz-btn" onclick="answer(this,'q1',true)">To stay alive</button>
+        <button class="quiz-btn" onclick="answer(this,'q1',false)">To fall asleep</button>
+      </div>
+      <div class="quiz-comment ok">⭕ Correct! <b>Survive</b> = 生きのびる. Great job!</div>
+      <div class="quiz-comment ng">❌ Not quite! <b>Survive</b> means "to stay alive"（生きのびる）.</div>
+    </div>
+
+    <div class="quiz-q" id="q2">
+      <div class="quiz-num">Q2</div>
+      <div class="quiz-text">Giraffes <b>adapted</b> to reach leaves high in trees.<br>What does "<b>adapt</b>" mean?</div>
+      <div class="quiz-choices">
+        <button class="quiz-btn" onclick="answer(this,'q2',false)">To fall asleep quickly</button>
+        <button class="quiz-btn" onclick="answer(this,'q2',false)">To fight an enemy</button>
+        <button class="quiz-btn" onclick="answer(this,'q2',true)">To change to fit your environment</button>
+      </div>
+      <div class="quiz-comment ok">⭕ Correct! <b>Adapt</b> = 適応する. That's how giraffes got such long necks!</div>
+      <div class="quiz-comment ng">❌ Not quite! <b>Adapt</b> means "to change to fit your environment"（環境に合わせて変わる）.</div>
+    </div>
+
+    <div class="quiz-q" id="q3">
+      <div class="quiz-num">Q3</div>
+      <div class="quiz-text">A lion is a <b>predator</b> that hunts zebras.<br>What is a "<b>predator</b>"?</div>
+      <div class="quiz-choices">
+        <button class="quiz-btn" onclick="answer(this,'q3',false)">An animal that only eats plants</button>
+        <button class="quiz-btn" onclick="answer(this,'q3',true)">An animal that hunts other animals</button>
+        <button class="quiz-btn" onclick="answer(this,'q3',false)">An animal that lives in the ocean</button>
+      </div>
+      <div class="quiz-comment ok">⭕ Correct! A <b>predator</b> = ほ食者. Lions, sharks, and eagles are all predators!</div>
+      <div class="quiz-comment ng">❌ Not quite! A <b>predator</b> is "an animal that hunts other animals"（ほ食者）.</div>
+    </div>
+
+    <div class="quiz-q" id="q4">
+      <div class="quiz-num">Q4</div>
+      <div class="quiz-text">The octopus uses <b>camouflage</b> to hide from enemies.<br>What is "<b>camouflage</b>"?</div>
+      <div class="quiz-choices">
+        <button class="quiz-btn" onclick="answer(this,'q4',false)">Making a very loud sound</button>
+        <button class="quiz-btn" onclick="answer(this,'q4',false)">Running away very fast</button>
+        <button class="quiz-btn" onclick="answer(this,'q4',true)">Blending into the surroundings to hide</button>
+      </div>
+      <div class="quiz-comment ok">⭕ Correct! <b>Camouflage</b> = ぎ態・保護色. Octopuses can do this in just 0.3 seconds!</div>
+      <div class="quiz-comment ng">❌ Not quite! <b>Camouflage</b> means "blending into the surroundings to hide"（ぎ態）.</div>
+    </div>
+
+    <div class="quiz-q" id="q5">
+      <div class="quiz-num">Q5</div>
+      <div class="quiz-text">Bees <b>cooperate</b> to protect their hive.<br>What does "<b>cooperate</b>" mean?</div>
+      <div class="quiz-choices">
+        <button class="quiz-btn" onclick="answer(this,'q5',false)">To fight alone</button>
+        <button class="quiz-btn" onclick="answer(this,'q5',true)">To work together</button>
+        <button class="quiz-btn" onclick="answer(this,'q5',false)">To fly away</button>
+      </div>
+      <div class="quiz-comment ok">⭕ Correct! <b>Cooperate</b> = 協力する. Bees and ants are amazing at this!</div>
+      <div class="quiz-comment ng">❌ Not quite! <b>Cooperate</b> means "to work together"（協力する）.</div>
+    </div>
+
+    <div class="quiz-score" id="quiz-score">
+      <div class="quiz-score-num" id="score-num"></div>
+      <div class="quiz-score-msg" id="score-msg"></div>
+      <button class="quiz-retry" onclick="resetQuiz()">もういちどチャレンジ！</button>
+    </div>
+  </div>
+
+  <!-- 生き物 -->
+  <div id="tab-animals" class="tab-content">
+    <div class="section-label section-gap">注目の生き物を予習しよう</div>
+    <div class="animal-grid">
+      <div class="animal-card">
+        <div class="animal-icon">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Giraffe -->
+            <!-- body -->
+            <ellipse cx="42" cy="58" rx="14" ry="11" fill="#E8A830"/>
+            <!-- neck -->
+            <rect x="34" y="28" width="10" height="30" rx="5" fill="#E8A830"/>
+            <!-- head -->
+            <ellipse cx="39" cy="24" rx="9" ry="7" fill="#E8A830"/>
+            <!-- snout -->
+            <ellipse cx="39" cy="29" rx="5" ry="3.5" fill="#D49020"/>
+            <!-- nostril -->
+            <circle cx="37" cy="29" r="1" fill="#8B5E0A"/>
+            <circle cx="41" cy="29" r="1" fill="#8B5E0A"/>
+            <!-- eye -->
+            <circle cx="43" cy="22" r="2.5" fill="#fff"/>
+            <circle cx="43.5" cy="22" r="1.5" fill="#3B2000"/>
+            <circle cx="44" cy="21.5" r="0.5" fill="#fff"/>
+            <!-- horns -->
+            <rect x="38" y="14" width="3" height="7" rx="1.5" fill="#C8881A"/>
+            <rect x="44" y="15" width="3" height="6" rx="1.5" fill="#C8881A"/>
+            <circle cx="39.5" cy="14" r="2" fill="#D49020"/>
+            <circle cx="45.5" cy="15" r="2" fill="#D49020"/>
+            <!-- ear -->
+            <ellipse cx="32" cy="22" rx="3" ry="4.5" fill="#E8A830" transform="rotate(-15 32 22)"/>
+            <ellipse cx="32" cy="22" rx="1.5" ry="3" fill="#F4C060" transform="rotate(-15 32 22)"/>
+            <!-- spots on body -->
+            <ellipse cx="36" cy="55" rx="3.5" ry="3" fill="#A0631A" opacity="0.7"/>
+            <ellipse cx="47" cy="52" rx="3" ry="2.5" fill="#A0631A" opacity="0.7"/>
+            <ellipse cx="44" cy="62" rx="2.5" ry="2" fill="#A0631A" opacity="0.7"/>
+            <ellipse cx="36" cy="63" rx="2" ry="2.5" fill="#A0631A" opacity="0.7"/>
+            <!-- spots on neck -->
+            <ellipse cx="37" cy="38" rx="2" ry="3" fill="#A0631A" opacity="0.6"/>
+            <ellipse cx="41" cy="43" rx="2" ry="2.5" fill="#A0631A" opacity="0.6"/>
+            <!-- legs -->
+            <rect x="32" y="66" width="5" height="12" rx="2.5" fill="#D49020"/>
+            <rect x="39" y="66" width="5" height="12" rx="2.5" fill="#D49020"/>
+            <rect x="46" y="65" width="5" height="11" rx="2.5" fill="#C8881A"/>
+            <!-- hooves -->
+            <rect x="32" y="75" width="5" height="3" rx="1.5" fill="#8B5E0A"/>
+            <rect x="39" y="75" width="5" height="3" rx="1.5" fill="#8B5E0A"/>
+            <rect x="46" y="73" width="5" height="3" rx="1.5" fill="#8B5E0A"/>
+            <!-- tail -->
+            <path d="M56 60 Q62 63 60 70" stroke="#D49020" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <circle cx="60" cy="70" r="2" fill="#A0631A"/>
+          </svg>
+        </div>
+        <div class="animal-ja">キリン</div>
+        <div class="animal-en">Giraffe</div>
+        <div class="animal-fact">首の長さは最大1.8m。高い木の葉を食べるためにしんかした！</div>
+      </div>
+
+      <div class="animal-card">
+        <div class="animal-icon">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Octopus -->
+            <!-- tentacles back -->
+            <path d="M26 54 Q18 62 20 72" stroke="#B05090" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <path d="M54 54 Q62 62 60 72" stroke="#B05090" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <!-- tentacles mid -->
+            <path d="M30 58 Q22 68 26 76" stroke="#C060A0" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <path d="M50 58 Q58 68 54 76" stroke="#C060A0" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <!-- tentacles front -->
+            <path d="M35 60 Q30 70 33 78" stroke="#D070B0" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <path d="M45 60 Q50 70 47 78" stroke="#D070B0" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <path d="M40 61 Q40 72 40 79" stroke="#D070B0" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <path d="M37 61 Q34 73 36 79" stroke="#C868A8" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <!-- body -->
+            <ellipse cx="40" cy="38" rx="20" ry="22" fill="#D870B8"/>
+            <!-- head dome -->
+            <ellipse cx="40" cy="26" rx="16" ry="16" fill="#E080C8"/>
+            <!-- sheen -->
+            <ellipse cx="35" cy="20" rx="5" ry="4" fill="#F0A0D8" opacity="0.5"/>
+            <!-- eyes -->
+            <circle cx="33" cy="33" r="5" fill="#fff"/>
+            <circle cx="47" cy="33" r="5" fill="#fff"/>
+            <circle cx="33.5" cy="33.5" r="3" fill="#3B1A4A"/>
+            <circle cx="47.5" cy="33.5" r="3" fill="#3B1A4A"/>
+            <circle cx="34" cy="32.5" r="1" fill="#fff"/>
+            <circle cx="48" cy="32.5" r="1" fill="#fff"/>
+            <!-- smile -->
+            <path d="M35 40 Q40 44 45 40" stroke="#B05090" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <!-- suckers on tentacles -->
+            <circle cx="20" cy="68" r="2" fill="#F090C8"/>
+            <circle cx="60" cy="68" r="2" fill="#F090C8"/>
+            <circle cx="25" cy="73" r="1.5" fill="#F090C8"/>
+            <circle cx="55" cy="73" r="1.5" fill="#F090C8"/>
+          </svg>
+        </div>
+        <div class="animal-ja">タコ</div>
+        <div class="animal-en">Octopus</div>
+        <div class="animal-fact">体の色を0.3びょうで変えられる！まわりのけしきにとけこんでかくれる</div>
+      </div>
+
+      <div class="animal-card">
+        <div class="animal-icon">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Bat -->
+            <!-- left wing -->
+            <path d="M38 38 Q24 24 8 28 Q14 36 20 40 Q28 44 36 44" fill="#5A3A7A" opacity="0.9"/>
+            <!-- wing membrane lines -->
+            <path d="M36 42 Q22 30 10 30" stroke="#7A5A9A" stroke-width="0.8" fill="none" opacity="0.6"/>
+            <path d="M36 43 Q20 34 12 32" stroke="#7A5A9A" stroke-width="0.8" fill="none" opacity="0.6"/>
+            <!-- right wing -->
+            <path d="M42 38 Q56 24 72 28 Q66 36 60 40 Q52 44 44 44" fill="#5A3A7A" opacity="0.9"/>
+            <path d="M44 42 Q58 30 70 30" stroke="#7A5A9A" stroke-width="0.8" fill="none" opacity="0.6"/>
+            <path d="M44 43 Q60 34 68 32" stroke="#7A5A9A" stroke-width="0.8" fill="none" opacity="0.6"/>
+            <!-- body -->
+            <ellipse cx="40" cy="48" rx="8" ry="10" fill="#6B4A8A"/>
+            <!-- head -->
+            <ellipse cx="40" cy="36" rx="11" ry="10" fill="#7A5A9A"/>
+            <!-- ears -->
+            <path d="M32 30 L28 18 L36 26 Z" fill="#6B4A8A"/>
+            <path d="M48 30 L52 18 L44 26 Z" fill="#6B4A8A"/>
+            <path d="M33 29 L30 21 L36 27 Z" fill="#C890E0" opacity="0.5"/>
+            <path d="M47 29 L50 21 L44 27 Z" fill="#C890E0" opacity="0.5"/>
+            <!-- eyes -->
+            <circle cx="36" cy="36" r="3.5" fill="#FF6090"/>
+            <circle cx="44" cy="36" r="3.5" fill="#FF6090"/>
+            <circle cx="36" cy="36" r="2" fill="#200030"/>
+            <circle cx="44" cy="36" r="2" fill="#200030"/>
+            <circle cx="36.7" cy="35.3" r="0.8" fill="#fff"/>
+            <circle cx="44.7" cy="35.3" r="0.8" fill="#fff"/>
+            <!-- nose -->
+            <ellipse cx="40" cy="41" rx="3" ry="2" fill="#5A3070"/>
+            <circle cx="38.5" cy="41" r="1" fill="#200030"/>
+            <circle cx="41.5" cy="41" r="1" fill="#200030"/>
+            <!-- mouth -->
+            <path d="M37 44 Q40 46 43 44" stroke="#5A3070" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            <!-- tiny fangs -->
+            <line x1="39" y1="44" x2="38.5" y2="46" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+            <line x1="41" y1="44" x2="41.5" y2="46" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+            <!-- feet hanging -->
+            <path d="M36 57 Q34 63 32 65" stroke="#5A3A7A" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M44 57 Q46 63 48 65" stroke="#5A3A7A" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M30 65 L28 67 M31 65 L30 68 M32 65 L32 68" stroke="#5A3A7A" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M46 65 L44 67 M47 65 L47 68 M48 65 L50 67" stroke="#5A3A7A" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="animal-ja">コウモリ</div>
+        <div class="animal-en">Bat</div>
+        <div class="animal-fact">目が見えなくても音のはね返りで障害物をよけて飛べる</div>
+      </div>
+
+      <div class="animal-card">
+        <div class="animal-icon">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Ant -->
+            <!-- antennae -->
+            <path d="M36 22 Q30 14 26 10" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <path d="M44 22 Q50 14 54 10" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <circle cx="26" cy="10" r="2" fill="#1A1A1A"/>
+            <circle cx="54" cy="10" r="2" fill="#1A1A1A"/>
+            <!-- head -->
+            <ellipse cx="40" cy="26" rx="10" ry="9" fill="#2A1A0A"/>
+            <!-- eyes -->
+            <circle cx="35" cy="24" r="3" fill="#000"/>
+            <circle cx="45" cy="24" r="3" fill="#000"/>
+            <circle cx="35.8" cy="23.2" r="1.2" fill="#fff" opacity="0.7"/>
+            <circle cx="45.8" cy="23.2" r="1.2" fill="#fff" opacity="0.7"/>
+            <!-- mandibles -->
+            <path d="M34 33 Q30 37 28 35" stroke="#1A0A00" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M46 33 Q50 37 52 35" stroke="#1A0A00" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <!-- neck connecting head to thorax -->
+            <rect x="36" y="33" width="8" height="9" rx="4" fill="#2A1A0A"/>
+            <!-- thorax -->
+            <ellipse cx="40" cy="44" rx="8" ry="7" fill="#3A2A10"/>
+            <!-- legs from thorax -->
+            <path d="M33 41 Q24 38 20 34" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M33 44 Q22 44 18 44" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M33 47 Q24 52 20 56" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M47 41 Q56 38 60 34" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M47 44 Q58 44 62 44" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M47 47 Q56 52 60 56" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <!-- foot dots -->
+            <circle cx="19" cy="34" r="1.5" fill="#1A1A1A"/>
+            <circle cx="17" cy="44" r="1.5" fill="#1A1A1A"/>
+            <circle cx="19" cy="56" r="1.5" fill="#1A1A1A"/>
+            <circle cx="61" cy="34" r="1.5" fill="#1A1A1A"/>
+            <circle cx="63" cy="44" r="1.5" fill="#1A1A1A"/>
+            <circle cx="61" cy="56" r="1.5" fill="#1A1A1A"/>
+            <!-- abdomen -->
+            <ellipse cx="40" cy="63" rx="11" ry="13" fill="#2A1A0A"/>
+            <!-- abdomen sheen -->
+            <ellipse cx="37" cy="57" rx="3.5" ry="2.5" fill="#5A4A30" opacity="0.5"/>
+            <!-- waist -->
+            <ellipse cx="40" cy="53" rx="3.5" ry="2.5" fill="#1A0A00"/>
+          </svg>
+        </div>
+        <div class="animal-ja">アリ</div>
+        <div class="animal-en">Ant</div>
+        <div class="animal-fact">体重の50ばいのものを運べる！みんなで力をあわせると何でもできる</div>
+      </div>
+
+      <div class="animal-card">
+        <div class="animal-icon">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Shark -->
+            <!-- tail fin -->
+            <path d="M62 40 L75 30 L72 40 L75 50 Z" fill="#5A8AAA"/>
+            <!-- body -->
+            <ellipse cx="38" cy="42" rx="30" ry="14" fill="#6A9ABB"/>
+            <!-- belly -->
+            <ellipse cx="35" cy="46" rx="22" ry="8" fill="#E8EEF2"/>
+            <!-- dorsal fin -->
+            <path d="M38 28 L46 14 L50 28 Z" fill="#5A8AAA"/>
+            <!-- pectoral fin left -->
+            <path d="M30 46 L18 56 L28 52 Z" fill="#5A8AAA"/>
+            <!-- pectoral fin right -->
+            <path d="M32 38 L20 28 L30 36 Z" fill="#5A8AAA"/>
+            <!-- snout -->
+            <ellipse cx="12" cy="42" rx="8" ry="7" fill="#6A9ABB"/>
+            <!-- mouth -->
+            <path d="M8 44 Q12 50 20 46" fill="#E8EEF2" stroke="#5A8AAA" stroke-width="0.5"/>
+            <!-- teeth -->
+            <path d="M10 45 L10 48 M13 46 L13 49 M16 46 L16 49" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- gills -->
+            <path d="M24 34 Q26 42 24 50" stroke="#5A8AAA" stroke-width="1.5" fill="none"/>
+            <path d="M28 33 Q30 42 28 51" stroke="#5A8AAA" stroke-width="1.2" fill="none"/>
+            <!-- eye -->
+            <circle cx="17" cy="39" r="4" fill="#1A1A2A"/>
+            <circle cx="17" cy="39" r="2.5" fill="#0A0A1A"/>
+            <circle cx="18" cy="38" r="1" fill="#fff" opacity="0.7"/>
+            <!-- sheen on body -->
+            <ellipse cx="38" cy="37" rx="14" ry="4" fill="#8AC0D8" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="animal-ja">サメ</div>
+        <div class="animal-en">Shark</div>
+        <div class="animal-fact">3おく年以上むかしから地球にいる！ほとんどすがたが変わっていない</div>
+      </div>
+
+      <div class="animal-card">
+        <div class="animal-icon">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Butterfly -->
+            <!-- upper left wing -->
+            <path d="M38 38 Q28 20 10 18 Q8 30 18 36 Q28 42 38 42" fill="#E8780A"/>
+            <!-- upper left wing pattern -->
+            <path d="M38 38 Q28 20 10 18 Q8 30 18 36 Q28 42 38 42" fill="none" stroke="#C05800" stroke-width="1" opacity="0.6"/>
+            <ellipse cx="22" cy="26" rx="5" ry="4" fill="#1A1A1A" opacity="0.25"/>
+            <ellipse cx="16" cy="30" rx="3" ry="3" fill="#1A1A1A" opacity="0.2"/>
+            <path d="M26 36 Q20 32 14 34" stroke="#fff" stroke-width="1" opacity="0.4" fill="none"/>
+            <!-- white spots upper left -->
+            <circle cx="12" cy="22" r="2" fill="#fff" opacity="0.7"/>
+            <circle cx="20" cy="20" r="1.5" fill="#fff" opacity="0.6"/>
+            <!-- upper right wing -->
+            <path d="M42 38 Q52 20 70 18 Q72 30 62 36 Q52 42 42 42" fill="#E8780A"/>
+            <ellipse cx="58" cy="26" rx="5" ry="4" fill="#1A1A1A" opacity="0.25"/>
+            <circle cx="68" cy="22" r="2" fill="#fff" opacity="0.7"/>
+            <circle cx="60" cy="20" r="1.5" fill="#fff" opacity="0.6"/>
+            <!-- lower left wing -->
+            <path d="M38 42 Q24 48 16 60 Q26 66 34 58 Q38 52 40 44" fill="#F0A030"/>
+            <ellipse cx="24" cy="57" rx="4" ry="4" fill="#1A1A1A" opacity="0.2"/>
+            <circle cx="20" cy="62" r="2.5" fill="#1A1A1A" opacity="0.3"/>
+            <!-- lower right wing -->
+            <path d="M42 42 Q56 48 64 60 Q54 66 46 58 Q42 52 40 44" fill="#F0A030"/>
+            <ellipse cx="56" cy="57" rx="4" ry="4" fill="#1A1A1A" opacity="0.2"/>
+            <circle cx="60" cy="62" r="2.5" fill="#1A1A1A" opacity="0.3"/>
+            <!-- body -->
+            <ellipse cx="40" cy="42" rx="3" ry="18" fill="#1A1A1A"/>
+            <!-- head -->
+            <circle cx="40" cy="23" r="4" fill="#1A1A1A"/>
+            <!-- antennae -->
+            <path d="M38 20 Q34 12 30 8" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <path d="M42 20 Q46 12 50 8" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <circle cx="30" cy="8" r="2.5" fill="#E8780A"/>
+            <circle cx="50" cy="8" r="2.5" fill="#E8780A"/>
+            <!-- eye -->
+            <circle cx="38.5" cy="22" r="1.5" fill="#fff" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="animal-ja">チョウ</div>
+        <div class="animal-en">Butterfly</div>
+        <div class="animal-fact">足で味がわかる！はねのもようでてきをおどろかせる</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ワークシート -->
+  <div id="tab-worksheet" class="tab-content">
+    <div class="section-label section-gap">見学ワークシート — 行く前・見ている間・帰ってから</div>
+
+    <div class="worksheet">
+      <div class="ws-header">
+        <div class="ws-num">前</div>
+        <div class="ws-title">行く前の予そう</div>
+      </div>
+      <div class="ws-q">一番見たい生き物はどれ？なぜ見たいか書いてみよう。</div>
+      <textarea class="ws-input" rows="3" placeholder="例：コウモリがどうやってくらやみを飛ぶのか知りたい！"></textarea>
+    </div>
+
+    <div class="worksheet">
+      <div class="ws-header">
+        <div class="ws-num">前</div>
+        <div class="ws-title">生き物が生きのびる「くふう」って何だと思う？</div>
+      </div>
+      <div class="ws-q">自分のことばで書いてみよう。</div>
+      <textarea class="ws-input" rows="3" placeholder="例：てきからにげる方ほうや、ご飯を見つける方ほうだと思う…"></textarea>
+    </div>
+
+    <div class="worksheet">
+      <div class="ws-header">
+        <div class="ws-num">中</div>
+        <div class="ws-title">一番びっくりしたこと</div>
+      </div>
+      <div class="ws-q">てんじを見て「えっ、すごい！」と思ったことを書こう。どの動物？何がすごかった？</div>
+      <textarea class="ws-input" rows="3" placeholder="メモしておこう…"></textarea>
+    </div>
+
+    <div class="worksheet">
+      <div class="ws-header">
+        <div class="ws-num">中</div>
+        <div class="ws-title">6つのチャプター — チェックリスト</div>
+      </div>
+      <div class="ws-check">
+        <label><input type="checkbox"> 👁️ Chapter 1: 五かんのちがいを体けんした</label>
+        <label><input type="checkbox"> 🍖 Chapter 2: おもしろい食べ方の動物を見た</label>
+        <label><input type="checkbox"> 🐘 Chapter 3: 大きさのひみつを学んだ</label>
+        <label><input type="checkbox"> 🦅 Chapter 4: いろんないどう方を知った</label>
+        <label><input type="checkbox"> 🐝 Chapter 5: 群れのふしぎを発見した</label>
+        <label><input type="checkbox"> 🌿 Chapter 6: 命のつながりを感じた</label>
+      </div>
+    </div>
+
+    <div class="worksheet">
+      <div class="ws-header">
+        <div class="ws-num">後</div>
+        <div class="ws-title">今日の学びをえいごで言ってみよう</div>
+      </div>
+      <div class="ws-q">今日いちばん「すごい！」と思ったことをえいごで書いてみよう。</div>
+      <textarea class="ws-input" rows="2" placeholder='"I learned that bats can fly in the dark!"'></textarea>
+    </div>
+
+    <div class="worksheet">
+      <div class="ws-header">
+        <div class="ws-num">後</div>
+        <div class="ws-title">今日のてんじ、なん点？</div>
+      </div>
+      <div class="ws-q">楽しかった？正直にひょうかしてみよう。</div>
+      <div class="stars" id="star-row">
+        <span class="star-btn" onclick="rateStar(1)">⭐</span>
+        <span class="star-btn" onclick="rateStar(2)">⭐</span>
+        <span class="star-btn" onclick="rateStar(3)">⭐</span>
+        <span class="star-btn" onclick="rateStar(4)">⭐</span>
+        <span class="star-btn" onclick="rateStar(5)">⭐</span>
+      </div>
+      <textarea class="ws-input" rows="2" style="margin-top: 10px;" placeholder="感想を自由に書こう！"></textarea>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+function rateStar(n) {
+  document.querySelectorAll('.star-btn').forEach((s, i) => {
+    s.classList.toggle('lit', i < n);
+  });
+}
+
+var quizScore = 0;
+var quizAnswered = 0;
+var totalQ = 5;
+
+function answer(btn, qid, correct) {
+  var q = document.getElementById(qid);
+  if (q.dataset.done) return;
+  q.dataset.done = '1';
+  var btns = q.querySelectorAll('.quiz-btn');
+  btns.forEach(function(b) { b.disabled = true; });
+  var comments = q.querySelectorAll('.quiz-comment');
+  if (correct) {
+    btn.classList.add('correct');
+    comments[0].classList.add('show');
+    quizScore++;
+  } else {
+    btn.classList.add('wrong');
+    comments[1].classList.add('show');
+    btns.forEach(function(b) {
+      if (b.onclick.toString().includes('true')) b.classList.add('correct');
+    });
+  }
+  quizAnswered++;
+  if (quizAnswered === totalQ) {
+    setTimeout(showScore, 600);
+  }
+}
+
+function showScore() {
+  var el = document.getElementById('quiz-score');
+  var msgs = ['もういちどチャレンジしてみよう！', 'もう少し！がんばれ！', 'なかなかいいね！', 'すごい！よくできました！', 'かんぺき！満点だよ！'];
+  var idx = quizScore <= 1 ? 0 : quizScore === 2 ? 1 : quizScore === 3 ? 2 : quizScore === 4 ? 3 : 4;
+  document.getElementById('score-num').textContent = quizScore + ' / ' + totalQ + ' もんせいかい！';
+  document.getElementById('score-msg').textContent = msgs[idx];
+  el.classList.add('show');
+  el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function resetQuiz() {
+  quizScore = 0;
+  quizAnswered = 0;
+  document.querySelectorAll('.quiz-q').forEach(function(q) {
+    delete q.dataset.done;
+    q.querySelectorAll('.quiz-btn').forEach(function(b) {
+      b.disabled = false;
+      b.classList.remove('correct', 'wrong');
+    });
+    q.querySelectorAll('.quiz-comment').forEach(function(c) { c.classList.remove('show'); });
+  });
+  document.getElementById('quiz-score').classList.remove('show');
+}
+</script>
+</body>
+</html>
